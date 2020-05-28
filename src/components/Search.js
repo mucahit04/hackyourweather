@@ -13,7 +13,7 @@ export default function Search() {
 	const fetchCityWeather = async () => {
 		setLoading(true);
 		try {
-			const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+			const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
 			const res = await fetch(apiUrl);
 			if (!res.ok) {
 				setError(true);
