@@ -9,27 +9,56 @@
 	align-items: center;
 	font-size: calc(10px + 2vmin);
 	color: black;
-	margin:3%;
+	margin: 3%;
 }
-.city-item{
-	border:2px solid black;
-	width:20%; 
-	margin:auto;
-	margin-bottom:3%;
-	padding-left:2%;
+.main-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-ul{
-	list-style-type:none;
-	padding:0;
+.cityLoading-div {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
 }
-li{
-	margin-bottom:3%;
+.city-item {
+	text-align: left;
+	border: 2px solid black;
+	width: 100%;
+	margin: auto;
+	margin-bottom: 3%;
+	margin-top: 4%;
+	padding-left: 5%;
 }
-.weather-desc{
-	padding-bottom:2%;
-	line-height:.3em;
+.search-div {
+	text-align: center;
+	margin-bottom: 5%;
+	margin: auto;
+	width: 25%;
 }
-.bold{
-	font-weight:bold;
-	padding-bottom:0;
+button {
+	font-size: 1.1em;
+	margin-left: 1%;
+	width: 100px;
+	height: 40px;
+}
+.input {
+	font-size: 1.1em;
+	width: 200px;
+	height: 33px;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+li {
+	margin-bottom: 3%;
+}
+.weather-desc {
+	padding-bottom: 2%;
+	line-height: 0.3em;
+}
+.bold {
+	font-weight: bold;
+	padding-bottom: 0;
 }

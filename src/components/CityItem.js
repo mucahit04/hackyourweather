@@ -1,9 +1,13 @@
 import React from "react";
 
-export default function CityItem({ city }) {
-	const { name, sys, weather, main, coord } = city;
+export default function CityItem({ cityData }) {
+	const name = cityData.name;
+	const sys = cityData.sys;
+	const weather = cityData.weather;
+	const main = cityData.main;
+	const coord = cityData.coord;
 	return (
-		<div className='city-item'>
+		<div>
 			<h2>
 				{name}, {sys.country}
 			</h2>
