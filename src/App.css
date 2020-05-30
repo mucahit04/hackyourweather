@@ -24,7 +24,7 @@
 .city-item {
 	text-align: left;
 	border: 2px solid black;
-	width: 100%;
+	width: 70%;
 	margin: auto;
 	margin-bottom: 3%;
 	margin-top: 4%;
@@ -36,15 +36,22 @@
 	margin: auto;
 	width: 25%;
 }
-button {
+.form {
+	width: 70%;
+	margin: auto;
+	display: flex;
+	justify-content: stretch;
+	font-size: 1.2em;
+}
+.button {
 	font-size: 1.1em;
 	margin-left: 1%;
-	width: 100px;
-	height: 40px;
+	width: 28%;
+	/* height: 40px; */
 }
 .input {
 	font-size: 1.1em;
-	width: 200px;
+	width: 75%;
 	height: 33px;
 }
 ul {

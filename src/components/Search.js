@@ -13,7 +13,7 @@ export default function Search() {
 	const fetchCityWeather = async () => {
 		setLoading(true);
 		try {
-			const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+			const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
 			const res = await fetch(apiUrl);
 			if (!res.ok) {
 				setError(true);
@@ -28,22 +28,28 @@ export default function Search() {
 			setError(true);
 		}
 	};
+	const handleSubmit = e => {
+		e.preventDefault();
+		fetchCityWeather();
+	};
 
 	return (
 		<>
 			<div className='search-div'>
 				{!cityData.name && <p>Type a city name and search for the weather</p>}
 				{isLoading && <p>Loading..</p>}
-				<input
-					className='input'
-					type='text'
-					value={cityName}
-					onChange={event => {
-						const value = event.target.value;
-						setCityName(value);
-					}}
-				/>
-				<button onClick={() => fetchCityWeather()}>Search</button>
+				<form onSubmit={handleSubmit} className='form'>
+					<input
+						type='text'
+						className='input'
+						value={cityName}
+						onChange={event => {
+							let value = event.target.value;
+							setCityName(value);
+						}}
+					/>
+					<input className='button' type='submit' value='Search' />
+				</form>
 
 				{error && !isLoading && <p>Fetch error!</p>}
 				{!isLoading && !error && cityData.name && (
