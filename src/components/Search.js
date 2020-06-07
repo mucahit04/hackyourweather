@@ -8,37 +8,49 @@ export default function Search() {
 	const [error, setError] = useState(false);
 	const [isLoading, setLoading] = useState(false);
 	const [cityName, setCityName] = useState("");
-	const [cityData, setCityData] = useState({});
+	const [cityList, setCityList] = useState([]);
 
-	const fetchCityWeather = async () => {
+	const fetchCityWeather = async apiUrl => {
 		setLoading(true);
 		try {
-			const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
 			const res = await fetch(apiUrl);
 			if (!res.ok) {
 				setError(true);
 				setLoading(false);
 			} else {
 				const data = await res.json();
-				setCityData(data);
+				const uniqeCities = cityList.filter(city => city.id !== data.id);
+				setCityList([data, ...uniqeCities]);
+
+				// setCityList(cityList => [...cityList, data]);
 				setLoading(false);
 				setError(false);
 			}
 		} catch (error) {
 			setError(true);
 		}
+		return { isLoading, error, cityList };
 	};
-	const handleSubmit = e => {
-		e.preventDefault();
-		fetchCityWeather();
+
+	const handleDelete = id => {
+		const newCityList = cityList.filter(city => city.id !== id);
+		setCityList(newCityList);
 	};
 
 	return (
 		<>
 			<div className='search-div'>
-				{!cityData.name && <p>Type a city name and search for the weather</p>}
+				{!cityList.length !== 0 && <p>Type a city name and search for the weather</p>}
 				{isLoading && <p>Loading..</p>}
-				<form onSubmit={handleSubmit} className='form'>
+				<form
+					onSubmit={e => {
+						e.preventDefault();
+						fetchCityWeather(
+							`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+						);
+					}}
+					className='form'
+				>
 					<input
 						type='text'
 						className='input'
@@ -48,15 +60,15 @@ export default function Search() {
 							setCityName(value);
 						}}
 					/>
-					<input className='button' type='submit' value='Search' />
+					<input className='button' type='submit' value='Search' disabled={cityName.length === 0} />
 				</form>
 
-				{error && !isLoading && <p>Fetch error!</p>}
-				{!isLoading && !error && cityData.name && (
-					<div className='city-item'>
-						<CityItem cityData={cityData} />
+				{error && !isLoading && <p>Couldn't get data! Please refresh the page and try again.</p>}
+				{cityList.map(city => (
+					<div key={city.id} className='city-item'>
+						<CityItem city={city} handleDelete={handleDelete} error={error} />
 					</div>
-				)}
+				))}
 			</div>
 		</>
 	);
