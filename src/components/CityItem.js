@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CityItem({ city, handleDelete, error }) {
 	const name = city.name;
@@ -9,7 +10,7 @@ export default function CityItem({ city, handleDelete, error }) {
 	return (
 		<div>
 			<h2>
-				{name}, {sys.country}
+				<Link to={`/${city.id}`}>{name}</Link>, {sys.country}
 				<button className='eraseBtn' onClick={() => handleDelete(city.id)}>
 					<i className='fa fa-times-circle'></i>
 				</button>
